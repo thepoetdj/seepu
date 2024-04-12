@@ -9,4 +9,4 @@ historical statistics will also be included in the resulting JSON.
 '
 rm -f $STATS_TEMP_FILE
 # log the formatted JSON
-echo $STATS >> $STATS_LOG_FILE
+echo $STATS | tee -a $STATS_LOG_FILE
