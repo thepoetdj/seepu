@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # capture cpu & memory usage statistics
+STATS_TEMP_FILE=/tmp/seepu.stats
 STATS=$(sar -r 1 1 -o $STATS_TEMP_FILE &> 1 && sadf $STATS_TEMP_FILE -j -- -u -r | jq -c '.sysstat')
 : '
 The sar output is stored in a temporary file,

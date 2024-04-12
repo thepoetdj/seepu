@@ -1,7 +1,6 @@
 FROM alpine:3.19
 RUN apk --no-cache add sysstat jq
 ENV INTERVAL=5
-ENV STATS_TEMP_FILE=/tmp/seepu.stats
 ENV STATS_LOG_FILE=/var/log/seepu.log
 WORKDIR /opt/seepu
 COPY seepu.sh .
