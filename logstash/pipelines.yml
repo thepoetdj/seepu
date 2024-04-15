@@ -1,0 +1,2 @@
+- pipeline.id: seepu
+  path.config: "/usr/share/logstash/pipeline/seepu-pipeline.conf"

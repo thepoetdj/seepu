@@ -1,0 +1,6 @@
+node:
+  name: seepu-logstash
+http:
+  host: 0.0.0.0
+api:
+  environment: dev

@@ -1,0 +1,28 @@
+name: seepu
+
+services:
+  app:
+    image: seepu:latest
+    pull_policy: build
+    build: .
+    environment:
+      INTERVAL: 2
+    volumes:
+      - logs:/var/log
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:8.13.2-amd64
+    volumes:
+      - logs:/var/log
+      - logstash-db:/usr/share/logstash/data
+      - ./logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+      - ./logstash/seepu-pipeline.conf:/usr/share/logstash/pipeline/seepu-pipeline.conf:ro
+    environment:
+      LS_JAVA_OPTS: "-Xms256m -Xmx256m"
+
+volumes:
+  logs:
+    name: seepu-logs
+  logstash-db:
+    name: seepu-logstash-db
