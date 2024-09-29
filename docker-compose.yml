@@ -52,6 +52,20 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: seepu-cluster
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 1@kafka:9092
+  
+  prometheus:
+    image: bitnami/prometheus:2.54.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus:/opt/bitnami/prometheus/data
+      - ./prometheus/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
+  
+  exporter:
+    image: danielqsj/kafka-exporter:v1.8.0
+    command: ["--kafka.server=1@kafka:9092", "--no-sasl.handshake"]
+    ports:
+      - "9308:9308"
 
 volumes:
   logs:
@@ -60,3 +74,5 @@ volumes:
     name: seepu-logstash-db
   kafka:
     name: seepu-kafka
+  prometheus:
+    name: seepu-prometheus-db
